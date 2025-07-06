@@ -92,7 +92,8 @@ if "df_katanomi" in st.session_state:
         excel_bytes = create_excel_file(df)
         st.download_button("📥 Κατέβασε το αρχείο Excel", data=excel_bytes, file_name="katanomi.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
-   st.subheader("📊 Πίνακας Στατιστικών Κατανομής")
+  st.subheader("📊 Πίνακας Στατιστικών Κατανομής")  # Καμία εσοχή
+
 
 st.subheader("📊 Ραβδογράμματα Κατανομής")
 επιλογη = st.radio("Επιλέξτε τύπο γραφήματος:", ["Συγκεντρωτικό", "Ξεχωριστά ανά κατηγορία"])
