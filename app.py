@@ -63,10 +63,13 @@ def create_excel_file(df):
 # ➤ Ραβδογράμματα
 def plot_distribution(df, column, title):
     fig, ax = plt.subplots()
-    df.groupby(['ΤΜΗΜΑ', column]).size().unstack(fill_value=0).plot(kind='bar', stacked=True, ax=ax)
+    grouped = df.groupby(['ΤΜΗΜΑ', column]).size().unstack(fill_value=0)
+    grouped.columns.name = column
+    grouped.plot(kind='bar', stacked=True, ax=ax)
     ax.set_title(title)
     ax.set_ylabel('Αριθμός Μαθητών')
     st.pyplot(fig)
+
 
 # ➤ Εφαρμογή Streamlit
 st.title("📘 Ψηφιακή Κατανομή Μαθητών Α' Δημοτικού")
