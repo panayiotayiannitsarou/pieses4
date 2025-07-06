@@ -105,7 +105,17 @@ if "df_katanomi" in st.session_state:
         plot_distribution(df, 'ΠΑΙΔΙ ΕΚΠΑΙΔΕΥΤΙΚΟΥ', "Κατανομή Παιδιών Εκπαιδευτικών")
         plot_distribution(df, 'ΙΚΑΝΟΠΟΙΗΤΙΚΗ ΜΑΘΗΣΙΑΚΗ ΙΚΑΝΟΤΗΤΑ', "Κατανομή Μαθησιακής Ικανότητας")
     else:
-        for col in ['ΦΥΛΟ', 'ΖΩΗΡΟΣ', 'ΙΔΙΑΙΤΕΡΟΤΗΤΑ', 'ΚΑΛΗ ΓΝΩΣΗ ΕΛΛΗΝΙΚΩΝ', 'ΠΑΙΔΙ ΕΚΠΑΙΔΕΥΤΙΚΟΥ', 'ΙΚΑΝΟΠΟΙΗΤΙΚΗ ΜΑΘΗΣΙΑΚΗ ΙΚΑΝΟΤΗΤΑ']:
+ df_stats = pd.DataFrame()
+df_stats["Αγόρια"] = df[df["ΦΥΛΟ"] == "Α"].groupby("ΤΜΗΜΑ").size()
+df_stats["Κορίτσια"] = df[df["ΦΥΛΟ"] == "Κ"].groupby("ΤΜΗΜΑ").size()
+df_stats["Ζωηροί"] = df[df["ΖΩΗΡΟΣ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
+df_stats["Ιδιαιτερότητα"] = df[df["ΙΔΙΑΙΤΕΡΟΤΗΤΑ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
+df_stats["Καλή Γνώση Ελληνικών"] = df[df["ΚΑΛΗ ΓΝΩΣΗ ΕΛΛΗΝΙΚΩΝ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
+df_stats["Παιδί Εκπαιδευτικού"] = df[df["ΠΑΙΔΙ ΕΚΠΑΙΔΕΥΤΙΚΟΥ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
+df_stats["Ικανοποιητική Μαθησιακή Ικανότητα"] = df[df["ΙΚΑΝΟΠΟΙΗΤΙΚΗ ΜΑΘΗΣΙΑΚΗ ΙΚΑΝΟΤΗΤΑ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
+df_stats = df_stats.fillna(0).astype(int)
+st.dataframe(df_stats)
+
             plot_distribution(df, col, f"Κατανομή βάσει {col}")
 
 # ➤ Δήλωση Πνευματικών Δικαιωμάτων
