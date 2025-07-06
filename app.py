@@ -92,21 +92,19 @@ if "df_katanomi" in st.session_state:
         excel_bytes = create_excel_file(df)
         st.download_button("📥 Κατέβασε το αρχείο Excel", data=excel_bytes, file_name="katanomi.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
-    st.subheader("📊 Πίνακας Στατιστικών Κατανομής")
+   st.subheader("📊 Πίνακας Στατιστικών Κατανομής")
 
-    st.subheader("📊 Ραβδογράμματα Κατανομής")
-    επιλογη = st.radio("Επιλέξτε τύπο γραφήματος:", ["Συγκεντρωτικό", "Ξεχωριστά ανά κατηγορία"])
-    if επιλογη == "Συγκεντρωτικό":
-        plot_distribution(df, 'ΦΥΛΟ', "Κατανομή Φύλου")
-        plot_distribution(df, 'ΖΩΗΡΟΣ', "Κατανομή Ζωηρών Μαθητών")
-        plot_distribution(df, 'ΙΔΙΑΙΤΕΡΟΤΗΤΑ', "Κατανομή Ιδιαιτεροτήτων")
-        plot_distribution(df, 'ΚΑΛΗ ΓΝΩΣΗ ΕΛΛΗΝΙΚΩΝ', "Κατανομή Γνώσης Ελληνικών")
-        plot_distribution(df, 'ΠΑΙΔΙ ΕΚΠΑΙΔΕΥΤΙΚΟΥ', "Κατανομή Παιδιών Εκπαιδευτικών")
-        plot_distribution(df, 'ΙΚΑΝΟΠΟΙΗΤΙΚΗ ΜΑΘΗΣΙΑΚΗ ΙΚΑΝΟΤΗΤΑ', "Κατανομή Μαθησιακής Ικανότητας")
-    else:
-  else:
-    df_stats = pd.DataFrame()
+st.subheader("📊 Ραβδογράμματα Κατανομής")
+επιλογη = st.radio("Επιλέξτε τύπο γραφήματος:", ["Συγκεντρωτικό", "Ξεχωριστά ανά κατηγορία"])
 
+if επιλογη == "Συγκεντρωτικό":
+    plot_distribution(df, 'ΦΥΛΟ', "Κατανομή Φύλου")
+    plot_distribution(df, 'ΖΩΗΡΟΣ', "Κατανομή Ζωηρών Μαθητών")
+    plot_distribution(df, 'ΙΔΙΑΙΤΕΡΟΤΗΤΑ', "Κατανομή Ιδιαιτεροτήτων")
+    plot_distribution(df, 'ΚΑΛΗ ΓΝΩΣΗ ΕΛΛΗΝΙΚΩΝ', "Κατανομή Γνώσης Ελληνικών")
+    plot_distribution(df, 'ΠΑΙΔΙ ΕΚΠΑΙΔΕΥΤΙΚΟΥ', "Κατανομή Παιδιών Εκπαιδευτικών")
+    plot_distribution(df, 'ΙΚΑΝΟΠΟΙΗΤΙΚΗ ΜΑΘΗΣΙΑΚΗ ΙΚΑΝΟΤΗΤΑ', "Κατανομή Μαθησιακής Ικανότητας")
+else:
     df_stats["Αγόρια"] = df[df["ΦΥΛΟ"] == "Α"].groupby("ΤΜΗΜΑ").size()
     df_stats["Κορίτσια"] = df[df["ΦΥΛΟ"] == "Κ"].groupby("ΤΜΗΜΑ").size()
     df_stats["Ζωηροί"] = df[df["ΖΩΗΡΟΣ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
@@ -116,6 +114,9 @@ if "df_katanomi" in st.session_state:
     df_stats["Ικανοποιητική Μαθησιακή Ικανότητα"] = df[df["ΙΚΑΝΟΠΟΙΗΤΙΚΗ ΜΑΘΗΣΙΑΚΗ ΙΚΑΝΟΤΗΤΑ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
     df_stats = df_stats.fillna(0).astype(int)
     st.dataframe(df_stats)
+
+
+ 
 
 
 # ➤ Δήλωση Πνευματικών Δικαιωμάτων
