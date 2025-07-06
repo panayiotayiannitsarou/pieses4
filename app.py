@@ -104,7 +104,9 @@ if "df_katanomi" in st.session_state:
         plot_distribution(df, 'ΠΑΙΔΙ ΕΚΠΑΙΔΕΥΤΙΚΟΥ', "Κατανομή Παιδιών Εκπαιδευτικών")
         plot_distribution(df, 'ΙΚΑΝΟΠΟΙΗΤΙΚΗ ΜΑΘΗΣΙΑΚΗ ΙΚΑΝΟΤΗΤΑ', "Κατανομή Μαθησιακής Ικανότητας")
     else:
+  else:
     df_stats = pd.DataFrame()
+
     df_stats["Αγόρια"] = df[df["ΦΥΛΟ"] == "Α"].groupby("ΤΜΗΜΑ").size()
     df_stats["Κορίτσια"] = df[df["ΦΥΛΟ"] == "Κ"].groupby("ΤΜΗΜΑ").size()
     df_stats["Ζωηροί"] = df[df["ΖΩΗΡΟΣ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
