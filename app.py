@@ -93,7 +93,6 @@ if "df_katanomi" in st.session_state:
         st.download_button("📥 Κατέβασε το αρχείο Excel", data=excel_bytes, file_name="katanomi.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
     st.subheader("📊 Πίνακας Στατιστικών Κατανομής")
-    st.dataframe(df.groupby('ΤΜΗΜΑ')[['ΦΥΛΟ', 'ΖΩΗΡΟΣ', 'ΙΔΙΑΙΤΕΡΟΤΗΤΑ', 'ΚΑΛΗ ΓΝΩΣΗ ΕΛΛΗΝΙΚΩΝ', 'ΠΑΙΔΙ ΕΚΠΑΙΔΕΥΤΙΚΟΥ', 'ΙΚΑΝΟΠΟΙΗΤΙΚΗ ΜΑΘΗΣΙΑΚΗ ΙΚΑΝΟΤΗΤΑ']].agg(lambda x: (x == 'Ν').sum()))
 
     st.subheader("📊 Ραβδογράμματα Κατανομής")
     επιλογη = st.radio("Επιλέξτε τύπο γραφήματος:", ["Συγκεντρωτικό", "Ξεχωριστά ανά κατηγορία"])
@@ -105,16 +104,16 @@ if "df_katanomi" in st.session_state:
         plot_distribution(df, 'ΠΑΙΔΙ ΕΚΠΑΙΔΕΥΤΙΚΟΥ', "Κατανομή Παιδιών Εκπαιδευτικών")
         plot_distribution(df, 'ΙΚΑΝΟΠΟΙΗΤΙΚΗ ΜΑΘΗΣΙΑΚΗ ΙΚΑΝΟΤΗΤΑ', "Κατανομή Μαθησιακής Ικανότητας")
     else:
- df_stats = pd.DataFrame()
-df_stats["Αγόρια"] = df[df["ΦΥΛΟ"] == "Α"].groupby("ΤΜΗΜΑ").size()
-df_stats["Κορίτσια"] = df[df["ΦΥΛΟ"] == "Κ"].groupby("ΤΜΗΜΑ").size()
-df_stats["Ζωηροί"] = df[df["ΖΩΗΡΟΣ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
-df_stats["Ιδιαιτερότητα"] = df[df["ΙΔΙΑΙΤΕΡΟΤΗΤΑ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
-df_stats["Καλή Γνώση Ελληνικών"] = df[df["ΚΑΛΗ ΓΝΩΣΗ ΕΛΛΗΝΙΚΩΝ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
-df_stats["Παιδί Εκπαιδευτικού"] = df[df["ΠΑΙΔΙ ΕΚΠΑΙΔΕΥΤΙΚΟΥ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
-df_stats["Ικανοποιητική Μαθησιακή Ικανότητα"] = df[df["ΙΚΑΝΟΠΟΙΗΤΙΚΗ ΜΑΘΗΣΙΑΚΗ ΙΚΑΝΟΤΗΤΑ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
-df_stats = df_stats.fillna(0).astype(int)
-st.dataframe(df_stats)
+    df_stats = pd.DataFrame()
+    df_stats["Αγόρια"] = df[df["ΦΥΛΟ"] == "Α"].groupby("ΤΜΗΜΑ").size()
+    df_stats["Κορίτσια"] = df[df["ΦΥΛΟ"] == "Κ"].groupby("ΤΜΗΜΑ").size()
+    df_stats["Ζωηροί"] = df[df["ΖΩΗΡΟΣ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
+    df_stats["Ιδιαιτερότητα"] = df[df["ΙΔΙΑΙΤΕΡΟΤΗΤΑ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
+    df_stats["Καλή Γνώση Ελληνικών"] = df[df["ΚΑΛΗ ΓΝΩΣΗ ΕΛΛΗΝΙΚΩΝ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
+    df_stats["Παιδί Εκπαιδευτικού"] = df[df["ΠΑΙΔΙ ΕΚΠΑΙΔΕΥΤΙΚΟΥ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
+    df_stats["Ικανοποιητική Μαθησιακή Ικανότητα"] = df[df["ΙΚΑΝΟΠΟΙΗΤΙΚΗ ΜΑΘΗΣΙΑΚΗ ΙΚΑΝΟΤΗΤΑ"] == "Ν"].groupby("ΤΜΗΜΑ").size()
+    df_stats = df_stats.fillna(0).astype(int)
+    st.dataframe(df_stats)
 
             plot_distribution(df, col, f"Κατανομή βάσει {col}")
 
