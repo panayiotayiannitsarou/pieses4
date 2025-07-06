@@ -115,7 +115,6 @@ if "df_katanomi" in st.session_state:
     df_stats = df_stats.fillna(0).astype(int)
     st.dataframe(df_stats)
 
-            plot_distribution(df, col, f"Κατανομή βάσει {col}")
 
 # ➤ Δήλωση Πνευματικών Δικαιωμάτων
 st.markdown("---")
